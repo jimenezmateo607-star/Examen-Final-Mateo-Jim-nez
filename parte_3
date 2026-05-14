@@ -1,7 +1,96 @@
-lista = []
-a = 0
-for x in range (10):
-  a += 1
-  lista.append(a)   
+class jugador:
+    def __init__(self, nombre, simbolo):
+        self.nombre = nombre
+        self.simbolo = simbolo
 
-print(lista)
+    def jugada (self, t, casilla):
+        while True:
+            if casilla == 1 and t[1] == " ":
+                t[1] = self.simbolo
+                break
+            if casilla == 2 and t[2] == " ":
+                t[2] = self.simbolo
+                break
+            if casilla == 3 and t[3] == " ":
+                t[3] = self.simbolo
+                break
+            if casilla == 4 and t[4] == " ":
+                t[4] = self.simbolo
+                break
+            if casilla == 5 and t[5] == " ":
+                t[5] = self.simbolo
+                break
+            if casilla == 6 and t[6] == " ":
+                t[6] = self.simbolo
+                break
+            if casilla == 7 and t[7] == " ":
+                t[7] = self.simbolo
+                break
+            if casilla == 8 and t[8] == " ":
+                t[8] = self.simbolo
+                break
+            if casilla == 9 and t[8] == " ":
+                t[9] = self.simbolo
+                break
+            else:
+                print("Debe ser una casilla vacía")
+                casilla = int(input("dame una casilla: "))
+        print(f"\n_{t[1]}_|_{t[2]}_|_{t[3]}_\n_{t[4]}_|_{t[5]}_|_{t[6]}_\n_{t[7]}_|_{t[8]}_|_{t[9]}_")
+
+    def ganador(self,t):
+        if t[1] == t[2] and t[1] == t[3] and t[1]==self.simbolo:
+            return(f"gano {self.nombre}")
+        if t[4] == t[5] and t[5] == t[6] and t[4]==self.simbolo:
+            return(f"gano {self.nombre}")
+        if t[6] == t[7] and t[7] == t[8] and t[6]==self.simbolo:
+            return(f"gano {self.nombre}")
+        if t[1] == t[4] and t[4] == t[6] and t[1]==self.simbolo:
+            return(f"gano {self.nombre}")
+        if t[2] == t[5] and t[5] == t[7] and t[2]==self.simbolo:
+            return(f"gano {self.nombre}")
+        if t[3] == t[6] and t[6] == t[8] and t[3]==self.simbolo:
+            return(f"gano {self.nombre}")
+        if t[1] == t[5] and t[5] == t[9] and t[1]==self.simbolo:
+            return(f"gano {self.nombre}")
+        if t[7] == t[5] and t[5] == t[3] and t[7]==self.simbolo:
+            return(f"gano {self.nombre}")
+        
+    def tablero_lleno(self,t):
+        a = 0
+        for x in t:
+            if x == self.simbolo:
+                a += 1
+        if a == 9:
+            return True
+
+
+tablero={1:" ",2:" ",3:" ",4:" ",5:" ",6:" ",7:" ",8:" ",9:" "}
+
+historial = []
+
+jugador1 =jugador(input("Dame un nombre: "),"X")
+jugador2 =jugador(input("Dame un nombre: "),"O")
+
+while True:
+    print("\n_1_|_2_|_3_\n_4_|_5_|_6_\n_7_|_8_|_9_")
+    jugada_a=int(input("Dame una casilla: "))
+    print(jugador1.jugada(tablero,jugada_a))
+    if jugador1.ganador(tablero) != None:
+        print(jugador1.ganador(tablero))
+        historial.append(jugador1.ganador(tablero,historial))
+        break
+    if jugador1.tablero_lleno(tablero):
+        print("empate")
+        break
+  
+    print("\n_1_|_2_|_3_\n_4_|_5_|_6_\n_7_|_8_|_9_")
+    jugada_a=int(input("Dame una casilla: "))
+    print(jugador2.jugada(tablero,jugada_a))
+    if jugador2.ganador(tablero) != None:
+        print(jugador2.ganador(tablero))
+        historial.append(jugador2.ganador(tablero,historial))
+        break
+    if jugador2.tablero_lleno(tablero):
+        print("empate")
+        break
+print(historial)
