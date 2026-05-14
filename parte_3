@@ -1,0 +1,7 @@
+lista = []
+a = 0
+for x in range (10):
+  a += 1
+  lista.append(a)   
+
+print(lista)
